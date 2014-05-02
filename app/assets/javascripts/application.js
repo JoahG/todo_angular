@@ -8,7 +8,7 @@ TodoApp.config(function(RestangularProvider){
 	RestangularProvider.setDefaultRequestParams({ 'user_email': document.getElementById('user_email').innerHTML, 'auth_token':document.getElementById('user_auth_token').innerHTML});
 });
 
-TodoApp.controller('NewItem', function ($scope, Restangular) {
+TodoApp.controller('NewItem', ['$scope', 'Restangular', function ($scope, Restangular) {
 	$scope.items = Restangular.all('todo_items');
 
 	$scope.create = function(todo_item){
@@ -16,9 +16,9 @@ TodoApp.controller('NewItem', function ($scope, Restangular) {
 		document.getElementById('new_item').reset();
 		$("#refresh").click();
 	}
-});
+}]);
 
-TodoApp.controller('ListItems', function ($scope, Restangular) {
+TodoApp.controller('ListItems', ['$scope', 'Restangular', function ($scope, Restangular) {
 	$scope.items = Restangular.all('todo_items');
 	$scope.sorted_column = 'priority'
 	$scope.sorted_direction = 'desc'
@@ -54,9 +54,9 @@ TodoApp.controller('ListItems', function ($scope, Restangular) {
 	$("#refresh").click(function(){$scope.refreshItems();})
 
 	$scope.refreshItems();
-});
+}]);
 
-TodoApp.controller('EditItem', function ($scope, Restangular) {
+TodoApp.controller('EditItem', ['$scope', 'Restangular', function ($scope, Restangular) {
 	t = new Date($scope.item.due_date)
 	$scope.overdue = t < new Date();
 	$scope.item.due_date = t.getFullYear() + '-' + ((t.getMonth()+1).toString(10).length > 1 ? t.getMonth()+1 : '0'+(t.getMonth()+1).toString(10)) + '-' + ((t.getDate()+1).toString(10).length > 1 ? t.getDate()+1 : '0'+(t.getDate()+1).toString(10));
@@ -72,7 +72,7 @@ TodoApp.controller('EditItem', function ($scope, Restangular) {
 		$scope.item.remove();
 		$("#refresh").click();
 	}
-})
+}])
 
 $(document).ready(function(){
 	$(document).on("click", "li:not(.completed) form.edit_todo_item div > div", function(){
