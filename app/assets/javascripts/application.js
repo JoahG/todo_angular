@@ -3,10 +3,10 @@
 
 var TodoApp = angular.module('TodoApp', ['restangular']);
 
-TodoApp.config(function(RestangularProvider){
+TodoApp.config(['RestangularProvider', function(RestangularProvider){
 	RestangularProvider.setBaseUrl('/api/v1');
 	RestangularProvider.setDefaultRequestParams({ 'user_email': document.getElementById('user_email').innerHTML, 'auth_token':document.getElementById('user_auth_token').innerHTML});
-});
+}]);
 
 TodoApp.controller('NewItem', ['$scope', 'Restangular', function ($scope, Restangular) {
 	$scope.items = Restangular.all('todo_items');
