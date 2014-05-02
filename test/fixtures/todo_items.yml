@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  priority: 1
+  due_date: 2014-05-01 13:18:16
+  user_id: 1
+  completed: false
+
+two:
+  title: MyString
+  priority: 1
+  due_date: 2014-05-01 13:18:16
+  user_id: 1
+  completed: false
