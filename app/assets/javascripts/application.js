@@ -84,7 +84,7 @@ $(document).ready(function(){
 			$('.focus').removeClass("focus");
 		}
 	})
-	$(document).on('click', 'a', function(e){
+	$(document).on('click', '.ngApp a', function(e){
 		e.preventDefault();
 	})
 })
