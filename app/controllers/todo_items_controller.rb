@@ -33,7 +33,7 @@ class TodoItemsController < ApplicationController
       if @todo_item.save
         format.json { render json: @todo_item }
       else
-        format.json { render 'rejected_save' }
+        format.json { render json: @todo_item.errors.full_messages }
       end
     end
   end
