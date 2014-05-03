@@ -25,7 +25,7 @@ angular.module('TodoApp').directive('todoItem', function () {
         }
       })
 
-      $(elem).find('input[type=text], input[type=number]').bind({
+      $(elem).find('input[type="text"], input[type="number"]').bind({
         blur: function(){
           scope.update();
         },
@@ -36,7 +36,7 @@ angular.module('TodoApp').directive('todoItem', function () {
         }
       });
 
-      $(elem).find('input[type=checkbox]').bind('click', function(e){
+      $(elem).find('input[type="checkbox"]').bind('click', function(e){
         scope.update();
       })
 
