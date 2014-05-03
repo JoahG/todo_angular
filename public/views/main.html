@@ -1,0 +1,24 @@
+<ul>
+  <li class="new_item_form">
+		<form id="new_item">
+			<input type="text" ng-model="todo_item.title" placeholder="New Item">
+			<input type="text" ng-model="todo_item.due_date" placeholder="Due Date"> 
+			<input type="number" ng-model="todo_item.priority" placeholder="Priority">
+			<input type="submit" ng-click="create(todo_item)" value="Add Item" class="refresh">
+		</form>
+	</li>
+  <section class="sorting" ng-if="todoItems.length > 0">
+  	Sort by: <a ng-click="sortBy('due_date')" class="{{ sorted_column == 'due_date' ? 'current '+sorted_direction : '' }}">Due Date</a> | <a ng-click="sortBy('priority')" class="{{ sorted_column == 'priority' ? 'current '+sorted_direction : '' }}">Priority</a>&nbsp;&nbsp;&nbsp;&nbsp; Combine Completed and Not Completed? <input type="checkbox" class='show_completed' ng-click="toggleShowCompleted(show_completed)">
+  </section>
+  <li data-ng-repeat="item in todoItems">
+    <span data-todo-item="item">
+    </span>
+  </li>
+  <br>
+  <div ng-if="completedTodoItems.length > 0">
+  	<h3>Completed Items</h3>
+  	<li data-ng-repeat="item in completedTodoItems">
+		<span data-todo-item="item"></span>
+	</li>
+  </div>
+</ul>

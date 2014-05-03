@@ -22,43 +22,43 @@ class TodoItemsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: current_user.todo_items.find(params[:id]) }
+      format.json { render json: authenticated_user.todo_items.find(params[:id]) }
     end
   end
 
   def create
-  	@todo_item = TodoItem.new(params[:todo_item])
-  	@todo_item.user_id = authenticated_user.id
+    @todo_item = TodoItem.new(params[:todo_item])
+    @todo_item.user_id = authenticated_user.id
     respond_to do |format|
-  		if @todo_item.save
+      if @todo_item.save
         format.json { render json: @todo_item }
       else
         format.json { render 'rejected_save' }
-  		end
-  	end
+      end
+    end
   end
 
   def update
-  	@todo_item = authenticated_user.todo_items.find(params[:id])
+    @todo_item = authenticated_user.todo_items.find(params[:id])
     begin 
       @todo_item.due_date.to_datetime
     rescue
       @todo_item.due_date = Date.today
     end
-  	respond_to do |format|
-  	  if @todo_item.update_attributes(params[:todo_item])
+    respond_to do |format|
+      if @todo_item.update_attributes(params[:todo_item])
         format.json { render json: @todo_item }
       else
         format.json { render 'rejected_update' }
-  	  end
-  	 end
+      end
+     end
   end
 
   def destroy
-  	authenticated_user.todo_items.find(params[:id]).destroy
-  	respond_to do |format|
+    authenticated_user.todo_items.find(params[:id]).destroy
+    respond_to do |format|
       format.json { render json: todo_items }
-  	end
+    end
   end
 
   private

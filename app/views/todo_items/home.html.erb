@@ -1,62 +1,14 @@
 <h1>Todo Items</h1>
-<ul class="ngApp">
-	<li class="new_item_form" ng-controller="NewItem">
-		<form id="new_item">
-			<input type="text" ng-model="todo_item.title" placeholder="New Item">
-			<input type="text" ng-model="todo_item.due_date" placeholder="Due Date"> 
-			<input type="number" ng-model="todo_item.priority" placeholder="Priority">
-			<input type="submit" onclick="create(todo_item)" value="Add Item" class="refresh">
-		</form>
-	</li>
-	<section class="items" ng-controller="ListItems">
-		<section class="sorting" ng-if="todo_items.length > 0">
-			Sort by: <a href="#!" ng-click="sortBy('due_date')" class="{{ sorted_column == 'due_date' ? 'current '+sorted_direction : '' }}">Due Date</a> | <a href="#!" ng-click="sortBy('priority')" class="{{ sorted_column == 'priority' ? 'current '+sorted_direction : '' }}">Priority</a>&nbsp;&nbsp;&nbsp;&nbsp; Combine Completed and Not Completed? <input type="checkbox" class='show_completed' ng-click="toggleShowCompleted(show_completed)">
-		</section>
-		<a id="refresh"></a>
-		<li ng-repeat="item in todo_items">
-			<form ng-controller="EditItem" class="{{ overdue ? 'overdue' : '' }} {{ item.completed ? 'completed' : '' }} edit_todo_item">
-				<div style="display:inline-block; position:relative;">
-					<input type="text" ng-model="item.title" ng-keyup="save($event)" disabled>
-					<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-				</div>​
+<div class="container" ng-view=""></div>
 
-				<div style="display:inline-block; position:relative;">
-					<input type="text" ng-model="item.due_date" ng-keyup="save($event)" disabled>
-					<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-				</div>​
-
-				<div style="display:inline-block; position:relative;">
-					<input type="number" ng-model="item.priority" ng-keyup="save($event)" disabled>
-					<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-				</div>​
-
-				<input type="checkbox" ng-model="item.completed" class="todo_item_completed" ng-click="save($event, true)">
-
-				<a href="#!" ng-click="delete()" class="refresh">Delete</a>
-			</form>
-		</li>
-		<br>
-		<div ng-if="completed_todo_items.length > 0">
-			<h3>Completed Items</h3>
-			<li ng-repeat="item in completed_todo_items">
-				<form ng-controller="EditItem" class="{{ item.completed ? 'completed' : '' }}">
-					<div style="display:inline-block; position:relative;">
-						<input type="text" ng-model="item.title" ng-keyup="save($event)" disabled>
-						<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-					</div>​
-					<div style="display:inline-block; position:relative;">
-						<input type="text" ng-model="item.due_date" ng-keyup="save($event)" disabled>
-						<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-					</div>​
-					<div style="display:inline-block; position:relative;">
-						<input type="number" ng-model="item.priority" ng-keyup="save($event)" disabled>
-						<div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div>
-					</div>​
-
-					<input type="checkbox" ng-model="item.completed" class="todo_item_completed" ng-click="save($event, true)">
-					<a href="#!" ng-click="delete()" class="refresh">Delete</a>
-				</form>
-			</li>
-		</div>
-	</section>
-</ul>
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/restangular/restangular.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/directives/todoitem.js"></script>

@@ -1,0 +1,38 @@
+.new_item_form {
+  list-style: none;
+}
+
+.overdue *:not(a) {
+  color: red !important;
+}
+
+.completed input:not(a) {
+  text-decoration: line-through !important;
+}
+
+form {
+  display:inline-block;
+}
+
+.current {
+  padding-right: 12px;
+  display:inline-block;
+}
+
+.asc {
+  background: url('/images/up_arrow.gif') no-repeat right center;
+}
+
+.desc {
+  background: url('/images/down_arrow.gif') no-repeat right center;;
+}
+
+input[type=text] {
+  width:200px;
+}
+
+.sorting a {
+	color:blue;
+	text-decoration:underline;
+	cursor:pointer;
+}
