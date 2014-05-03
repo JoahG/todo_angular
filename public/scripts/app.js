@@ -8,7 +8,7 @@ var app = angular.module('TodoApp', [
     'ngRoute'
   ]);
 
-app.config(function ($routeProvider) {
+app.config(['RestangularProvider', '$routeProvider', function(RestangularProvider, $routeProvider){
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
@@ -17,9 +17,6 @@ app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
-});
-
-app.config(['RestangularProvider', function(RestangularProvider){
- RestangularProvider.setBaseUrl('/api/v1');
- RestangularProvider.setDefaultRequestParams({ 'user_email': document.getElementById('user_email').innerHTML, 'auth_token':document.getElementById('user_auth_token').innerHTML});
+  RestangularProvider.setBaseUrl('/api/v1');
+  RestangularProvider.setDefaultRequestParams({ 'user_email': document.getElementById('user_email').innerHTML, 'auth_token':document.getElementById('user_auth_token').innerHTML});
 }]);
