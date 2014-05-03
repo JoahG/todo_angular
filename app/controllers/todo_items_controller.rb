@@ -21,8 +21,14 @@ class TodoItemsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: authenticated_user.todo_items.find(params[:id]) }
+    if authenticated_user
+      respond_to do |format|
+        format.json { render json: authenticated_user.todo_items.find(params[:id]) }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: [] }
+      end
     end
   end
 
@@ -76,18 +82,26 @@ class TodoItemsController < ApplicationController
   end
 
   def todo_items
-    if params[:show_completed] == 'true'
-      authenticated_user.todo_items.order(sort_column + " " + sort_direction)
+    if authenticated_user
+      if params[:show_completed] == 'true'
+        authenticated_user.todo_items.order(sort_column + " " + sort_direction)
+      else
+        authenticated_user.todo_items.where(:completed => false).order(sort_column + " " + sort_direction)
+      end
     else
-      authenticated_user.todo_items.where(:completed => false).order(sort_column + " " + sort_direction)
+      []
     end
   end
 
   def completed_todo_items
-    if params[:show_completed] == 'true'
-      []
+    if authenticated_user
+      if params[:show_completed] == 'true'
+        []
+      else
+        authenticated_user.todo_items.where(:completed => true).order(sort_column + " " + sort_direction)
+      end
     else
-      authenticated_user.todo_items.where(:completed => true).order(sort_column + " " + sort_direction)
+      []
     end
   end
 
