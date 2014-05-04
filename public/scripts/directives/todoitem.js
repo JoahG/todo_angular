@@ -19,13 +19,13 @@ angular.module('TodoApp').directive('todoItem', function () {
         scope.$parent.refresh();
       }
 
-      $(elem).find('a').bind('click', function() {
+      elem.find('a').bind('click', function() {
         if (confirm("Are you sure you want to delete this Todo Item?")){
           scope.item.remove();
         }
       })
 
-      $(elem).find('input[type="text"], input[type="number"]').bind({
+      elem.find('input[type="text"], input[type="number"]').bind({
         blur: function(){
           scope.update();
         },
