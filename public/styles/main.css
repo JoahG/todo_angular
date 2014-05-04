@@ -31,7 +31,7 @@ input[type=text] {
   width:200px;
 }
 
-.sorting a {
+.sorting a, .item a {
 	color:blue;
 	text-decoration:underline;
 	cursor:pointer;

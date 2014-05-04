@@ -10,13 +10,7 @@ class TodoItemsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.json { render json: todo_items }
-    end
-  end
-
-  def completed
-    respond_to do |format|
-      format.json { render json: completed_todo_items }
+      format.json { render json: authenticated_user.todo_items }
     end
   end
 
@@ -63,7 +57,7 @@ class TodoItemsController < ApplicationController
   def destroy
     authenticated_user.todo_items.find(params[:id]).destroy
     respond_to do |format|
-      format.json { render json: todo_items }
+      format.json { render json: authenticated_user.todo_items }
     end
   end
 
@@ -71,38 +65,6 @@ class TodoItemsController < ApplicationController
 
   def set_format
     request.format = :json
-  end
-
-  def sort_column
-    TodoItem.column_names.include?(params[:sort]) ? params[:sort] : "priority"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
-  end
-
-  def todo_items
-    if authenticated_user
-      if params[:show_completed] == 'true'
-        authenticated_user.todo_items.order(sort_column + " " + sort_direction)
-      else
-        authenticated_user.todo_items.where(:completed => false).order(sort_column + " " + sort_direction)
-      end
-    else
-      []
-    end
-  end
-
-  def completed_todo_items
-    if authenticated_user
-      if params[:show_completed] == 'true'
-        []
-      else
-        authenticated_user.todo_items.where(:completed => true).order(sort_column + " " + sort_direction)
-      end
-    else
-      []
-    end
   end
 
   def authenticated_user
