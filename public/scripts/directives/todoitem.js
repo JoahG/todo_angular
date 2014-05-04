@@ -3,9 +3,9 @@
 angular.module('TodoApp').directive('todoItem', function (Restangular) {
   return {
     template: "<div class='item'><form class='{{ item.completed ? "+'"completed"'+" : overdue ? "+'"overdue"'+" : "+'""'+"}}'> \
-                  <input type='text' data-ng-model='item.title'> \
-                  <input type='text' data-ng-model='item.due_date'> \
-                  <input type='number' data-ng-model='item.priority'> \
+                  <input type='text' data-ng-model='item.title' required> \
+                  <input type='text' data-ng-model='item.due_date' required> \
+                  <input type='number' data-ng-model='item.priority' required> \
                   <input type='checkbox' data-ng-model='item.completed'> \
               </form><a class='delete' ng-click='delete(item)'>Delete</a></div>",
     replace: true,
