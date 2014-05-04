@@ -19,9 +19,10 @@ angular.module('TodoApp').controller('MainCtrl', function ($scope, Restangular, 
   }
 
   $scope.create = function(todo_item){
-  	$scope.todoItems.post(todo_item);
+  	$scope.todoItems.post(todo_item).then(function(ti){
+      $scope.todoItems.push(ti);
+    });
     document.getElementById('new_item').reset();
-    $scope.refresh()
   }
 
   $scope.sortBy = function(col){
