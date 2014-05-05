@@ -12,9 +12,9 @@ angular.module('TodoApp').controller('MainCtrl', function ($scope, Restangular, 
   }
 
   $scope.init = function(){
-    Restangular.all('todo_items').getList({'sort': $scope.sorted_column, 'direction': $scope.sorted_direction, 'show_completed': $scope.show_completed}).then(function(todo_items) {
+    Restangular.all('todo_items').getList().then(function(todo_items) {
       $scope.rTodoItems = todo_items;
-      $scope.todoItems = $filter('orderBy')($scope.rTodoItems, $scope.sorted_direction+$scope.sorted_column);
+      $scope.refresh($scope.rTodoItems);
     });
   }
 
@@ -24,7 +24,6 @@ angular.module('TodoApp').controller('MainCtrl', function ($scope, Restangular, 
       $scope.refresh();
     });
 
-    $scope.refresh();
     document.getElementById('new_item').reset();
     todo_item = {};
   }
