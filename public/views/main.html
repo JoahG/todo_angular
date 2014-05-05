@@ -15,7 +15,7 @@
     </span>
   </li>
   <br>
-	<h3>Completed Items</h3>
+	<h3 ng-if="completed().length > 0">Completed Items</h3>
 	<li data-ng-repeat="item in completed()">
 		<span data-todo-item="item"></span>
 	</li>
