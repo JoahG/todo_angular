@@ -43,9 +43,19 @@ angular.module('TodoApp').controller('MainCtrl', function ($scope, Restangular, 
     $scope.show_completed = !b
   }
 
-  $scope.isCompleted = function(b){
-    return function(item){
-      return item.completed == b;
+  $scope.items = function(){
+    if (!$scope.show_completed) {
+      return $filter('isCompleted')($scope.todoItems, false)
+    } else {
+      return $scope.todoItems
+    }
+  }
+
+  $scope.completed = function(){
+    if (!$scope.show_completed) {
+      return $filter('isCompleted')($scope.todoItems, true)
+    } else {
+      return []
     }
   }
 

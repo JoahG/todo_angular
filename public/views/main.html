@@ -10,21 +10,13 @@
   <section class="sorting" ng-if="todoItems.length > 0">
   	Sort by: <a ng-click="sortBy('due_date')" class="{{ sorted_column == 'due_date' ? css_class() : '' }}">Due Date</a> | <a ng-click="sortBy('priority')" class="{{ sorted_column == 'priority' ? css_class() : '' }}">Priority</a>&nbsp;&nbsp;&nbsp;&nbsp; Combine Completed and Not Completed? <input type="checkbox" class='show_completed' ng-click="toggleShowCompleted(show_completed)">
   </section>
-  <div ng-if="!show_completed">
-    <li data-ng-repeat="item in todoItems | filter:isCompleted(false)">
-      <span data-todo-item="item">
-      </span>
-    </li>
-    <br>
-  	<h3>Completed Items</h3>
-  	<li data-ng-repeat="item in todoItems | filter:isCompleted(true)">
-  		<span data-todo-item="item"></span>
-  	</li>
-  </div>
-  <div ng-if="show_completed">
-    <li data-ng-repeat="item in todoItems">
-      <span data-todo-item="item">
-      </span>
-    </li>
-  </div>
+  <li data-ng-repeat="item in items()">
+    <span data-todo-item="item">
+    </span>
+  </li>
+  <br>
+	<h3>Completed Items</h3>
+	<li data-ng-repeat="item in completed()">
+		<span data-todo-item="item"></span>
+	</li>
 </ul>
