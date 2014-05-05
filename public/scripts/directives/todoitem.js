@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('TodoApp').directive('todoItem', function (Restangular) {
+angular.module('TodoApp').directive('todoItem', function (Restangular, $filter) {
   return {
     template: "<div class='item'><form class='{{ item.completed ? "+'"completed"'+" : overdue ? "+'"overdue"'+" : "+'""'+"}}'> \
                   <input type='text' data-ng-model='item.title' required> \
@@ -13,7 +13,7 @@ angular.module('TodoApp').directive('todoItem', function (Restangular) {
     scope: {
       item: '=todoItem'
     },
-    link: function (scope, elem, attrs, $filter) {
+    link: function (scope, elem, attrs) {
       scope.refresh = function(todo_item) {
         if (!todo_item) {
           Restangular.one('todo_items', scope.item.id).get().then(function(item){
@@ -62,8 +62,7 @@ angular.module('TodoApp').directive('todoItem', function (Restangular) {
         scope.update();
       });
 
-      var t = new Date(scope.item.due_date);
-      scope.item.due_date = t.getFullYear() + '-' + ((t.getMonth()+1).toString(10).length > 1 ? t.getMonth()+1 : '0'+(t.getMonth()+1).toString(10)) + '-' + ((t.getDate()+1).toString(10).length > 1 ? t.getDate()+1 : '0'+(t.getDate()+1).toString(10));
+      scope.item.due_date = $filter('date')(scope.item.due_date, 'yyyy-MM-dd')
       scope.overdue  = (new Date(scope.item.due_date).getTime() < new Date().getTime());
     }
   };
