@@ -4,7 +4,6 @@ angular.module('TodoApp').controller('MainCtrl', function ($scope, Restangular, 
   $scope.sorted_column = 'priority';
   $scope.sorted_direction = '-';
   $scope.show_completed = false;
-  $scope.css_class = function(){ return 'current '+($scope.sorted_direction=='+'?'asc':'desc'); }
 
   $scope.refresh = function(t){
     if (!t){ t = $scope.todoItems }

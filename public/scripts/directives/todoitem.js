@@ -2,7 +2,7 @@
 
 angular.module('TodoApp').directive('todoItem', function (Restangular, $filter) {
   return {
-    template: "<div class='item'><form class='{{ item.completed ? "+'"completed"'+" : overdue ? "+'"overdue"'+" : "+'""'+"}}'> \
+    template: "<div class='item'><form ng-class='{ completed: item.completed, overdue: !item.completed && overdue'> \
                   <input type='text' data-ng-model='item.title' required> \
                   <input type='text' data-ng-model='item.due_date' required> \
                   <input type='number' data-ng-model='item.priority' required> \

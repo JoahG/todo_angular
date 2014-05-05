@@ -8,7 +8,7 @@
 		</form>
 	</li>
   <section class="sorting" ng-if="todoItems.length > 0">
-  	Sort by: <a ng-click="sortBy('due_date')" class="{{ sorted_column == 'due_date' ? css_class() : '' }}">Due Date</a> | <a ng-click="sortBy('priority')" class="{{ sorted_column == 'priority' ? css_class() : '' }}">Priority</a>&nbsp;&nbsp;&nbsp;&nbsp; Combine Completed and Not Completed? <input type="checkbox" class='show_completed' ng-click="toggleShowCompleted(show_completed)">
+  	Sort by: <a ng-click="sortBy('due_date')" ng-class="{ desc : sorted_column == 'due_date' && sorted_direction=='-', asc : sorted_column == 'due_date' && sorted_direction=='+' }">Due Date</a> | <a ng-click="sortBy('priority')" ng-class="{ desc : sorted_column == 'priority' && sorted_direction=='-', asc : sorted_column == 'priority' && sorted_direction=='+' }">Priority</a>&nbsp;&nbsp;&nbsp;&nbsp; Combine Completed and Not Completed? <input type="checkbox" class='show_completed' ng-click="toggleShowCompleted(show_completed)">
   </section>
   <li data-ng-repeat="item in items()">
     <span data-todo-item="item">
