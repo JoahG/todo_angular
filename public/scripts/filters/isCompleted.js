@@ -5,7 +5,7 @@ angular.module('TodoApp').filter('isCompleted', function(){
 			if (item.completed == b) {
 				_items.push(item);
 			}
-		})
+		});
 		return _items;
 	}
-})
+});

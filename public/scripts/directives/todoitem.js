@@ -34,16 +34,16 @@ angular.module('TodoApp').directive('todoItem', function (Restangular) {
         }, function(res) {
           alert("An error occured when updating the Todo Item. Please check all fields and try again.");
           scope.refresh(false);
-        })
+        });
       }
 
       scope.delete = function(item) {
         if (confirm("Are you sure you want to delete this Todo Item?")) {
           item.remove().then(function(){
-            console.log(scope.item)
+            console.log(scope.item);
             scope.$parent.todoItems = _.without(scope.$parent.todoItems, scope.item);
             scope.$parent.refresh(scope.$parent.todoItems);
-          })
+          });
         }
       }
 
@@ -60,11 +60,11 @@ angular.module('TodoApp').directive('todoItem', function (Restangular) {
 
       $(elem).find('input[type="checkbox"]').bind('click', function(e){
         scope.update();
-      })
+      });
 
       var t = new Date(scope.item.due_date);
       scope.item.due_date = t.getFullYear() + '-' + ((t.getMonth()+1).toString(10).length > 1 ? t.getMonth()+1 : '0'+(t.getMonth()+1).toString(10)) + '-' + ((t.getDate()+1).toString(10).length > 1 ? t.getDate()+1 : '0'+(t.getDate()+1).toString(10));
-      scope.overdue  = (new Date(scope.item.due_date).getTime() < new Date().getTime())
+      scope.overdue  = (new Date(scope.item.due_date).getTime() < new Date().getTime());
     }
   };
 });
