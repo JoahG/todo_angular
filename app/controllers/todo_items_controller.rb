@@ -71,6 +71,8 @@ class TodoItemsController < ApplicationController
     user       = user_email && User.find_by_email(user_email)
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
       user
+    else
+      render :status => :unauthorized
     end
   end
 end
