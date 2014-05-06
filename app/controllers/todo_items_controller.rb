@@ -72,7 +72,9 @@ class TodoItemsController < ApplicationController
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
       user
     else
-      render :status => :unauthorized
+      respond_to do |format|
+        format.json { render :status => :unauthorized }
+      end
     end
   end
 end
