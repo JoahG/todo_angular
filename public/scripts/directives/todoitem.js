@@ -42,6 +42,10 @@ angular.module('TodoApp').directive('todoItem', function (Restangular, $filter) 
           item.remove().then(function(){
             scope.$parent.todoItems = _.without(scope.$parent.todoItems, scope.item);
             scope.$parent.refresh(scope.$parent.todoItems);
+          }, function() {
+            alert('Todo Item does not exist.')
+            scope.$parent.todoItems = _.without(scope.$parent.todoItems, scope.item);
+            scope.$parent.refresh(scope.$parent.todoItems);
           });
         }
       }
