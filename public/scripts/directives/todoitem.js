@@ -2,7 +2,7 @@
 
 angular.module('TodoApp').directive('todoItem', function (Restangular, $filter) {
   return {
-    template: "<div class='item'><form ng-class='{ completed: item.completed, overdue: !item.completed && overdue'> \
+    template: "<div class='item'><form ng-class='{ completed: item.completed, overdue: !item.completed && overdue }'> \
                   <input type='text' data-ng-model='item.title' required> \
                   <input type='text' data-ng-model='item.due_date' required> \
                   <input type='number' data-ng-model='item.priority' required> \
@@ -40,7 +40,6 @@ angular.module('TodoApp').directive('todoItem', function (Restangular, $filter) 
       scope.delete = function(item) {
         if (confirm("Are you sure you want to delete this Todo Item?")) {
           item.remove().then(function(){
-            console.log(scope.item);
             scope.$parent.todoItems = _.without(scope.$parent.todoItems, scope.item);
             scope.$parent.refresh(scope.$parent.todoItems);
           });
